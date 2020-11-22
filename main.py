@@ -1,13 +1,5 @@
 import pwdgen
 import pwdtest
-import os
-
-
-def clear():
-    if os.name == 'nt':
-        _ = os.system('cls')
-    else:
-        _ = os.system('clear')
 
 
 def printMenu(menu, funcs=None):
@@ -47,4 +39,3 @@ MAIN_MENU_FUNCTIONS = {'1': {'func': type(None), 'args': {}},
 if __name__ == '__main__':
     while True:
         printMenu(MAIN_MENU, funcs=MAIN_MENU_FUNCTIONS)
-        clear()
