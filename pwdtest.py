@@ -71,4 +71,14 @@ def dictAtk():
     pass_hash = hashlib.sha1(password.encode('utf-8'))
     pass_hash = pass_hash.hexdigest()
     response = requests.get('https://api.pwnedpasswords.com/range/' + pass_hash[0:5])
-    print(response.content)
+    hash_set = str(response.content).split('\\r\\')
+    hash_set[0] = hash_set[0][3:38]
+    for pos, p_hash in enumerate(hash_set):
+        hash_set[pos] = hash_set[pos][1:36].lower()
+    hash_set = set(hash_set)
+    start = time.process_time()
+    if pass_hash[5:] in hash_set:
+        print('Password found in: ' + str(time.process_time() - start) + ' seconds')
+    else:
+        print('Password secure.')
+    return
