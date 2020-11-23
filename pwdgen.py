@@ -22,16 +22,16 @@ CHAR_TO_SYMBOL = {'a': '@', 'A': '4', 's': '$', 'S': '5',
 
 
 def includeSetting(answer):
-    return answer == 'y' or answer == 'Y' or answer == 'yes' or answer == 'Yes'
+    return (answer == "y" or answer == "yes")
 
 
 def getInput():
     length = int(input('Enter Password Length (4 is lowest): '))
-    upperCase = input('Include Uppercase (y/n): ')
-    digits = input('Include Digits (y/n): ')
-    symbols = input('Include Symbols (y/n): ')
+    upperCase = input('Include Uppercase (y/n): ').lower()
+    digits = input('Include Digits (y/n): ').lower()
+    symbols = input('Include Symbols (y/n): ').lower()
 
-    characterChoices = LOWER_CASE_CHARACTERS
+    characterChoices = []
     temp_pass = [random.choice(LOWER_CASE_CHARACTERS)]
 
     if length < 4:
@@ -45,6 +45,7 @@ def getInput():
     if includeSetting(symbols):
         characterChoices += SYMBOLS
         temp_pass.append(random.choice(SYMBOLS))
+    characterChoices += LOWER_CASE_CHARACTERS
     return temp_pass, characterChoices, length
 
 
@@ -116,8 +117,3 @@ def trimDictionary(words, length):
             break
         i += 1
     return sortedWords[start:end]
-
-
-if __name__ == '__main__':
-    # print(generateRandomizedPassword())
-    print(generateRandomWordPassword())
