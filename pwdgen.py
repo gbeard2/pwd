@@ -3,6 +3,7 @@ import math
 from english_words import english_words_set
 
 DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
 LOWER_CASE_CHARACTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
                          'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
                          'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
@@ -33,15 +34,15 @@ def getInput():
     characterChoices = []
     temp_pass = [random.choice(LOWER_CASE_CHARACTERS)]
 
-    if(length < 4):
+    if length < 4:
         length = 4
-    if(includeSetting(upperCase)):
+    if includeSetting(upperCase):
         characterChoices += UPPER_CASE_CHARACTERS
         temp_pass.append(random.choice(UPPER_CASE_CHARACTERS))
-    if(includeSetting(digits)):
+    if includeSetting(digits):
         characterChoices += DIGITS
         temp_pass.append(random.choice(DIGITS))
-    if(includeSetting(symbols)):
+    if includeSetting(symbols):
         characterChoices += SYMBOLS
         temp_pass.append(random.choice(SYMBOLS))
     characterChoices += LOWER_CASE_CHARACTERS
@@ -71,25 +72,25 @@ def generateRandomWordPassword():
     wordSet = english_words_set
     wordLengthLimit = math.ceil(float(desiredLength) / float(wordCount))
 
-    if(wordLengthLimit <= 1 and desiredLength):
+    if wordLengthLimit <= 1 and desiredLength:
         print("The given length and number of words does not allow for password",
               "generation. Please increase the length or decrease the word count")
         return
-    if(wordCount > 1 and desiredLength):
+    if wordCount > 1 and desiredLength:
         wordLength = wordLengthLimit
         wordSet = trimDictionary(english_words_set, wordLength)
 
     for i in range(wordCount):
-        if(desiredLength > 0 and i is wordCount - 1):
+        if desiredLength > 0 and i is wordCount - 1:
             remainingCharacters = desiredLength - len(''.join(password))
             sortedSet = trimDictionary(english_words_set, remainingCharacters)
             randomWord = random.sample(sortedSet, 1)[0]
         else:
             randomWord = random.sample(wordSet, 1)[0]
 
-        if(includeSetting(replaceWithSymbols)):
+        if includeSetting(replaceWithSymbols):
             randomWord = replaceWithSymbol(randomWord)
-        if(includeSetting(randomCasing)):
+        if includeSetting(randomCasing):
             randomWord = ''.join(random.choice(
                 (str.upper, str.lower))(c) for c in randomWord)
 
@@ -100,7 +101,7 @@ def generateRandomWordPassword():
 def replaceWithSymbol(word):
     temp = list(word)
     for i in range(len(temp)):
-        if(temp[i] in CHAR_TO_SYMBOL):
+        if temp[i] in CHAR_TO_SYMBOL:
             temp[i] = CHAR_TO_SYMBOL[temp[i]]
     return ''.join(temp)
 
@@ -109,9 +110,9 @@ def trimDictionary(words, length):
     sortedWords = sorted(words, key=len)
     i = start = end = 0
     for word in sortedWords:
-        if(len(word) == length and start == 0):
+        if len(word) == length and start == 0:
             start = i
-        if(len(word) > length):
+        if len(word) > length:
             end = i - 1
             break
         i += 1
