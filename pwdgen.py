@@ -100,7 +100,7 @@ def generateRandomWordPassword():
 def replaceWithSymbol(word):
     temp = list(word)
     for i in range(len(temp)):
-        if(temp[i] in CHAR_TO_SYMBOL and random.uniform(0, 1)):
+        if(temp[i] in CHAR_TO_SYMBOL):
             temp[i] = CHAR_TO_SYMBOL[temp[i]]
     return ''.join(temp)
 
