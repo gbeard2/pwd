@@ -19,6 +19,8 @@ SYMBOLS = ['@', '#', '$', '%', '=', ':', '?', '.', '/', '|', '~', '>',
 
 CHAR_SETS = [DIGITS, LOWER_CASE_CHARACTERS, UPPER_CASE_CHARACTERS, SYMBOLS]
 
+MAX_RUNTIME = 1800
+
 
 def charCheck(password):
     potential_chars = []
@@ -40,7 +42,7 @@ def bruteForce():
     guess = []
     for i in range(0, char_count):
         guess.append(potential_chars[0])
-    while True:
+    while time.process_time() - start < MAX_RUNTIME:
         for i in range(1, len(potential_chars)):
             try:
                 assert guess == password
@@ -61,13 +63,17 @@ def bruteForce():
                         return
         else:
             break
-    print('Guess: ' + ''.join(guess))
-    print('Time to crack: ' + str(time.process_time() - start) + ' seconds')
+    if time.process_time() - start < MAX_RUNTIME:
+        print('Guess: ' + ''.join(guess))
+        print('Time to crack: ' + str(time.process_time() - start) + ' seconds')
+    else:
+        print('Brute force time-out.')
     return
 
 
 def dictAtk():
     password = input('Enter password: ')
+    start = time.process_time()
     pass_hash = hashlib.sha1(password.encode('utf-8'))
     pass_hash = pass_hash.hexdigest()
     response = requests.get('https://api.pwnedpasswords.com/range/' + pass_hash[0:5])
@@ -76,7 +82,6 @@ def dictAtk():
     for pos, p_hash in enumerate(hash_set):
         hash_set[pos] = hash_set[pos][1:36].lower()
     hash_set = set(hash_set)
-    start = time.process_time()
     if pass_hash[5:] in hash_set:
         print('Password found in: ' + str(time.process_time() - start) + ' seconds')
     else:
