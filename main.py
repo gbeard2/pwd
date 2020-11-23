@@ -20,6 +20,14 @@ def printMenu(menu, funcs=None):
     return
 
 
+GEN_MENU = {'1': 'Random',
+            '2': 'Set of Words',
+            '3': 'Return'}
+
+GEN_MENU_FUNCTIONS = {'1': {'func': pwdgen.generatePassword, 'args': {}},
+                      '2': {'func': type(None), 'args': {}},
+                      '3': {'func': type(None), 'args': {}}}
+
 TEST_MENU = {'1': 'Brute Force',
              '2': 'Dictionary Attack',
              '3': 'Return'}
@@ -32,7 +40,7 @@ MAIN_MENU = {'1': 'Generate Password',
              '2': 'Test Password',
              '3': 'Exit'}
 
-MAIN_MENU_FUNCTIONS = {'1': {'func': type(None), 'args': {}},
+MAIN_MENU_FUNCTIONS = {'1': {'func': printMenu, 'args': {'menu': GEN_MENU, 'funcs': GEN_MENU_FUNCTIONS}},
                        '2': {'func': printMenu, 'args': {'menu': TEST_MENU, 'funcs': TEST_MENU_FUNCTIONS}},
                        '3': {'func': exit, 'args': {}}}
 
