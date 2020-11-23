@@ -55,7 +55,7 @@ def generateRandomizedPassword():
         password.append(random.choice(characterChoices))
         random.shuffle(password)
 
-    print(''.join(password))
+    print("\nGenerated Password:", ''.join(password), '\n')
 
 
 def generateRandomWordPassword():
@@ -93,7 +93,7 @@ def generateRandomWordPassword():
                 (str.upper, str.lower))(c) for c in randomWord)
 
         password.append(randomWord)
-    print(''.join(password))
+    print("\nGenerated Password:", ''.join(password), '\n')
 
 
 def replaceWithSymbol(word):
