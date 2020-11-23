@@ -33,7 +33,7 @@ TEST_MENU = {'1': 'Brute Force',
              '3': 'Return'}
 
 TEST_MENU_FUNCTIONS = {'1': {'func': pwdtest.bruteForce, 'args': {}},
-                       '2': {'func': type(None), 'args': {}},
+                       '2': {'func': pwdtest.dictAtk, 'args': {}},
                        '3': {'func': type(None), 'args': {}}}
 
 MAIN_MENU = {'1': 'Generate Password',

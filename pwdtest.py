@@ -1,4 +1,6 @@
 import time
+import hashlib
+import requests
 
 DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
@@ -62,3 +64,11 @@ def bruteForce():
     print('Guess: ' + ''.join(guess))
     print('Time to crack: ' + str(time.process_time() - start) + ' seconds')
     return
+
+
+def dictAtk():
+    password = input('Enter password: ')
+    pass_hash = hashlib.sha1(password.encode('utf-8'))
+    pass_hash = pass_hash.hexdigest()
+    response = requests.get('https://api.pwnedpasswords.com/range/' + pass_hash[0:5])
+    print(response.content)
