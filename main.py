@@ -24,8 +24,8 @@ GEN_MENU = {'1': 'Random',
             '2': 'Set of Words',
             '3': 'Return'}
 
-GEN_MENU_FUNCTIONS = {'1': {'func': pwdgen.generatePassword, 'args': {}},
-                      '2': {'func': type(None), 'args': {}},
+GEN_MENU_FUNCTIONS = {'1': {'func': pwdgen.generateRandomizedPassword, 'args': {}},
+                      '2': {'func': pwdgen.generateRandomWordPassword, 'args': {}},
                       '3': {'func': type(None), 'args': {}}}
 
 TEST_MENU = {'1': 'Brute Force',
